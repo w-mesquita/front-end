@@ -1,5 +1,6 @@
 import Button from "@material-ui/core/Button";
 import { Component } from "react";
+
 import './styles.css'
 
 export class Buttons extends Component {

@@ -5,7 +5,7 @@ import "./styles.css";
 import { Posts } from "../../components/Posts";
 import { loadPosts } from "../../services/load-posts";
 import { Buttons } from "../../components/Button";
-import { FormControl, Input, InputLabel } from "@material-ui/core";
+import { SearchForm } from "../../components/SearchForm";
 
 class Home extends Component {
   state = {
@@ -49,33 +49,19 @@ class Home extends Component {
     const { posts, allPosts, page, postsPerPage, searchValue } = this.state;
     const noMorePosts = page + postsPerPage >= allPosts.length; //testa se a paginação é maior que a quantidade de postagens retorna true ou false
 
-    const filteredPosts = !!searchValue? 
-    allPosts.filter(post => {
-      return post.title.toLowerCase().includes(searchValue.toLowerCase());
-    }) 
-    : 
-    posts;
+    const filteredPosts = !!searchValue
+      ? allPosts.filter((post) => {
+          return post.title.toLowerCase().includes(searchValue.toLowerCase());
+        })
+      : posts;
 
     return (
       <section className="container">
-        <FormControl>
-          <InputLabel htmlFor="input-with-icon-adornment">
-            Procurar...
-          </InputLabel>
-          <Input
-            onChange={this.handleChange}
-            id="standard-search"
-            label="Procurar..."
-            type="search"
-            value={searchValue}
-          />
-        </FormControl>
+        <SearchForm onChange={this.handleChange} value={searchValue} />
 
         {!!searchValue && <h3>Procurando por: {searchValue}</h3>}
 
-        {filteredPosts.length > 0 && (
-          <Posts posts={filteredPosts} />
-        )}
+        {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
         {filteredPosts.length === 0 && (
           <p>Ops... nada encontrado por aqui... =(</p>
         )}
