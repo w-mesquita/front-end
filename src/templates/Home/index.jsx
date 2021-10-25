@@ -57,7 +57,7 @@ class Home extends Component {
 
     return (
       <section className="container">
-        <SearchForm onChange={this.handleChange} value={searchValue} />
+        <SearchForm handleChange={this.handleChange} searchValue={searchValue} />
 
         {!!searchValue && <h3>Procurando por: {searchValue}</h3>}
 
